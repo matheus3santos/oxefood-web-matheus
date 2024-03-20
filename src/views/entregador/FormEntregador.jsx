@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import InputMask from 'react-input-mask';
-import { Button, Checkbox, Container, Divider, Dropdown, DropdownMenu, Form, Icon } from 'semantic-ui-react';
+import { Button, Container, Divider, Dropdown, Form, Icon } from 'semantic-ui-react';
 import axios from "axios";
+import MenuSistema from "../../MenuSistema";
 
 
 
@@ -51,7 +52,7 @@ export default function FormEntregador() {
         axios.post("http://localhost:8080/api/entregador", entregadorRequest).then((response) => {
             console.log('Entregador cadastrado com sucesso!');
         }).catch((error) => {
-            console.log('Erro ao cadastrar cliente!');
+            console.log('Erro ao cadastrar entregador!');
         });
     }
 
@@ -60,12 +61,14 @@ export default function FormEntregador() {
     return (
 
         <div>
+            <MenuSistema tela={'Entregador'} />
+
 
             <div style={{ marginTop: '3%' }}>
 
                 <Container textAlign='justified' >
 
-                    <h2> <span style={{ color: 'darkgray' }}> Cliente &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro </h2>
+                    <h2> <span style={{ color: 'darkgray' }}> Entregador &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro </h2>
 
                     <Divider />
 
@@ -145,17 +148,17 @@ export default function FormEntregador() {
                                 <Form.Input
                                     fluid
                                     label='QTD Entregas Realizadas'
-                                    width={6}>
+                                    width={6}
                                     value={qtdEntregasRealizadas}
-                                    onChange={e => setQtdEntregasRealizadas(e.target.value)}
+                                    onChange={e => setQtdEntregasRealizadas(e.target.value)}>
                                 </Form.Input>
 
                                 <Form.Input
                                     fluid
                                     label='Valor Por Frete'
-                                    width={6}>
+                                    width={6}
                                     value={valorPorEntrega}
-                                    onChange={e => setValorPorEntrega(e.target.value)}
+                                    onChange={e => setValorPorEntrega(e.target.value)}>
                                 </Form.Input>
 
                             </Form.Group>
@@ -165,17 +168,17 @@ export default function FormEntregador() {
                                 <Form.Input
                                     fluid
                                     label='Rua'
-                                    width={10}>
+                                    width={10}
                                     value={rua}
-                                    onChange={e => setRua(e.target.value)}
+                                    onChange={e => setRua(e.target.value)}>
                                 </Form.Input>
 
                                 <Form.Input
                                     fluid
                                     label='Numero'
-                                    width={4}>
+                                    width={4}
                                     value={numero}
-                                    onChange={e => setNumero(e.target.value)}
+                                    onChange={e => setNumero(e.target.value)}>
                                 </Form.Input>
 
                             </Form.Group>
@@ -185,25 +188,26 @@ export default function FormEntregador() {
                                 <Form.Input
                                     fluid
                                     label='Bairro'
-                                    width={10}>
+                                    width={10}
                                     value={bairro}
-                                    onChange={e => setBairro(e.target.value)}
+                                    onChange={e => setBairro(e.target.value)}>
+
                                 </Form.Input>
 
                                 <Form.Input
                                     fluid
                                     label='Cidade'
-                                    width={10}>
+                                    width={10}
                                     value={cidade}
-                                    onChange={e => setCidade(e.target.value)}
+                                    onChange={e => setCidade(e.target.value)}>
                                 </Form.Input>
 
                                 <Form.Input
                                     fluid
                                     label='CEP'
-                                    width={10}>
+                                    width={10}
                                     value={cep}
-                                    onChange={e => setCep(e.target.value)}
+                                    onChange={e => setCep(e.target.value)}>
                                 </Form.Input>
 
                             </Form.Group>
@@ -224,9 +228,9 @@ export default function FormEntregador() {
                                 <Form.Input
                                     fluid
                                     label='Complemento'
-                                    width={10}>
+                                    width={10}
                                     value={complemento}
-                                    onChange={e => setComplemento(e.target.value)}
+                                    onChange={e => setComplemento(e.target.value)}>
                                 </Form.Input>
 
                             </Form.Group>

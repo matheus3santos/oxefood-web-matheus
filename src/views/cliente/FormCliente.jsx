@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import InputMask from 'react-input-mask';
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
 import axios from "axios";
+import MenuSistema from "../../MenuSistema";
 
 export default function FormCliente() {
 
@@ -34,6 +35,8 @@ export default function FormCliente() {
     return (
 
         <div>
+
+            <MenuSistema tela={'cliente'} />
 
             <div style={{ marginTop: '3%' }}>
 
@@ -102,9 +105,9 @@ export default function FormCliente() {
                                     width={6}
                                 >
                                     <InputMask
-                                        mask="99/99/9999"
+                                        mask="9999-99-99"
                                         maskChar={null}
-                                        placeholder="Ex: 20/03/1985"
+                                        placeholder="Ex: 2005/03/19"
                                         value={dataNascimento}
                                         onChange={e => setDataNascimento(e.target.value)}
                                     />
