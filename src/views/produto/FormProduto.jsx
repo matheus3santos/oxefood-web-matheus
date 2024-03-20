@@ -1,8 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import InputMask from 'react-input-mask';
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
+import axios from "axios";
 
-export default function FormCliente() {
+
+export default function FormProduto() {
+
+    const [titulo, setTitulo] = useState('');
+    const [codigo, setCodigo] = useState('');
+    const [descricao, setDescricao] = useState('');
+    const [valorUnitario, setUnitario] = useState('');
+    const [tempoMinimo, setTempoMinimo] = useState('');
+    const [tempoMaximo, setTempoMaximo] = useState('');
+
+
+    function salvar() {
+
+        let produtoRequest = {
+            titulo: titulo,
+            codigo: codigo,
+            descricao: descricao,
+            valorUnitario: valorUnitario,
+            tempoMinimo: tempoMinimo,
+            tempoMaximo: tempoMaximo
+        }
+
+        axios.post('http://localhost:8080/api/produto', produtoRequest).then((response) => {
+            console.log('Produto cadastrado com sucesso!');
+        }).catch((error) => {
+            console.log('Erro ao cadastrar produto!');
+        });
+    }
 
     return (
 
@@ -28,6 +56,8 @@ export default function FormCliente() {
                                     label='Titulo'
                                     placeholder='Informe o titulo do produto'
                                     maxLength="100"
+                                    value={titulo}
+                                    onChange={e => setTitulo(e.target.value)}
                                 />
 
                                 <Form.Input
@@ -35,6 +65,8 @@ export default function FormCliente() {
                                     fluid
                                     label='Codigo do Produto'
                                     placeholder='Informe o titulo do produto'
+                                    value={codigo}
+                                    onChange={e => setCodigo(e.target.value)}
                                 />
 
 
@@ -48,6 +80,8 @@ export default function FormCliente() {
                                     placeholder='Informe a descrição do produto'
                                     width={16}
                                     style={{ height: '6em' }}
+                                    value={descricao}
+                                    onChange={e => setDescricao(e.target.value)}
                                 />
                             </Form.Group>
 
@@ -57,59 +91,66 @@ export default function FormCliente() {
                                     required
                                     fluid
                                     label='Valor Unitário'
+                                    value={valorUnitario}
+                                    onChange={e => setUnitario(e.target.value)}
                                 />
 
                                 <Form.Input
                                     required
                                     fluid
-                                    label={<label style={{fontSize:'12px'}}>Tempo de Entrega Mínimo em Minutos</label>}
+                                    label={<label style={{ fontSize: '12px' }}>Tempo de Entrega Mínimo em Minutos</label>}
                                     placeholder='30'
+                                    value={tempoMinimo}
+                                    onChange={e => setTempoMinimo(e.target.value)}
                                 />
 
                                 <Form.Input
 
                                     required
                                     fluid
-                                    label={<label style={{fontSize:'12px'}}>Tempo de Entrega Máximo em Minutos</label>}
-                            placeholder='40'
+                                    label={<label style={{ fontSize: '12px' }}>Tempo de Entrega Máximo em Minutos</label>}
+                                    placeholder='40'
+                                    value={tempoMaximo}
+                                    onChange={e => setTempoMaximo(e.target.value)}
                                 />
 
 
-                        </Form.Group>
+                            </Form.Group>
 
-                    </Form>
+                        </Form>
 
-                    <div style={{ marginTop: '4%' }}>
+                        <div style={{ marginTop: '4%' }}>
 
-                        <Button
-                            type="button"
-                            inverted
-                            circular
-                            icon
-                            labelPosition='left'
-                            color='orange'
-                        >
-                            <Icon name='reply' />
-                            Listar
-                        </Button>
+                            <Button
+                                type="button"
+                                inverted
+                                circular
+                                icon
+                                labelPosition='left'
+                                color='orange'
+                            >
+                                <Icon name='reply' />
+                                Listar
+                            </Button>
 
-                        <Button
-                            inverted
-                            circular
-                            icon
-                            labelPosition='left'
-                            color='blue'
-                            floated='right'
-                        >
-                            <Icon name='save' />
-                            Salvar
-                        </Button>
+                            <Button
+                                inverted
+                                circular
+                                icon
+                                labelPosition='left'
+                                color='blue'
+                                floated='right'
+                                onClick={() => salvar()}
+                            >
+                                <Icon name='save' />
+                                Salvar
+                            </Button>
+
+                        </div>
 
                     </div>
 
-            </div>
-
-        </Container>
+                </Container>
             </div >
         </div >
 
