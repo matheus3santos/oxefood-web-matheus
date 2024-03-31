@@ -10,8 +10,8 @@ export default function FormProduto() {
     const [codigo, setCodigo] = useState('');
     const [descricao, setDescricao] = useState('');
     const [valorUnitario, setUnitario] = useState('');
-    const [tempoMinimo, setTempoMinimo] = useState('');
-    const [tempoMaximo, setTempoMaximo] = useState('');
+    const [tempoEntregaMinimo, setTempoEntregaMinimo] = useState('');
+    const [tempoEntregaMaximo, setTempoEntregaMaximo] = useState('');
 
 
     function salvar() {
@@ -21,8 +21,8 @@ export default function FormProduto() {
             codigo: codigo,
             descricao: descricao,
             valorUnitario: valorUnitario,
-            tempoMinimo: tempoMinimo,
-            tempoMaximo: tempoMaximo
+            tempoEntregaMinimo: tempoEntregaMinimo,
+            tempoEntregaMaximo: tempoEntregaMaximo
         }
 
         axios.post('http://localhost:8080/api/produto', produtoRequest).then((response) => {
@@ -102,8 +102,8 @@ export default function FormProduto() {
                                     fluid
                                     label={<label style={{ fontSize: '12px' }}>Tempo de Entrega Mínimo em Minutos</label>}
                                     placeholder='30'
-                                    value={tempoMinimo}
-                                    onChange={e => setTempoMinimo(e.target.value)}
+                                    value={tempoEntregaMinimo}
+                                    onChange={e => setTempoEntregaMinimo(e.target.value)}
                                 />
 
                                 <Form.Input
@@ -112,8 +112,8 @@ export default function FormProduto() {
                                     fluid
                                     label={<label style={{ fontSize: '12px' }}>Tempo de Entrega Máximo em Minutos</label>}
                                     placeholder='40'
-                                    value={tempoMaximo}
-                                    onChange={e => setTempoMaximo(e.target.value)}
+                                    value={tempoEntregaMaximo}
+                                    onChange={e => setTempoEntregaMaximo(e.target.value)}
                                 />
 
 

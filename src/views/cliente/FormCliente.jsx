@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import InputMask from 'react-input-mask';
 import { Button, Container, Divider, Form, Icon } from 'semantic-ui-react';
 import axios from "axios";
+import { Link, useLocation } from "react-router-dom";
 import MenuSistema from "../../MenuSistema";
 
+
+
+
+
+
 export default function FormCliente() {
+
+    const { state } = useLocation();
+    const [idCliente, setIdCliente] = useState();
+
 
     const [nome, setNome] = useState('');
     const [cpf, setCpf] = useState('');
@@ -17,20 +27,39 @@ export default function FormCliente() {
         let clienteRequest = {
             nome: nome,
             cpf: cpf,
+            dataNascimento: dataNascimento,
             foneCelular: foneCelular,
-            foneFixo: foneFixo,
-            dataNascimento: dataNascimento
+            foneFixo: foneFixo
         }
 
-        axios.post("http://localhost:8080/api/cliente", clienteRequest).then((response) => {
-            console.log('Cliente cadastrado com sucesso!');
-        }).catch((error) => {
-            console.log('Erro ao cadastrar cliente!');
-        });
+        if (idCliente != null) { //Alteração:
+            axios.put("http://localhost:8080/api/cliente/" + idCliente, clienteRequest)
+                .then((response) => { console.log('Cliente alterado com sucesso.') })
+                .catch((error) => { console.log('Erro ao alter um cliente.') })
+        } else { //Cadastro:
+            axios.post("http://localhost:8080/api/cliente", clienteRequest)
+                .then((response) => { console.log('Cliente cadastrado com sucesso.') })
+                .catch((error) => { console.log('Erro ao incluir o cliente.') })
+        }
+        ;
     }
 
+    useEffect(() => {
+        if (state != null && state.id != null) {
+            axios.get("http://localhost:8080/api/cliente/" + state.id)
+                .then((response) => {
+                    setIdCliente(response.data.id)
+                    setNome(response.data.nome)
+                    setCpf(response.data.cpf)
+                    setDataNascimento(response.data.dataNascimento)
+                    setFoneCelular(response.data.foneCelular)
+                    setFoneFixo(response.data.foneFixo)
+                })
+        }
+    }, [state])
 
 
+    //Renderização dos componentes
 
     return (
 
@@ -42,7 +71,12 @@ export default function FormCliente() {
 
                 <Container textAlign='justified' >
 
-                    <h2> <span style={{ color: 'darkgray' }}> Cliente &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro </h2>
+                    {idCliente === undefined &&
+                        <h2> <span style={{ color: 'darkgray' }}> Cliente &nbsp;<Icon name='angle double right' size="small" /> </span> Cadastro</h2>
+                    }
+                    {idCliente != undefined &&
+                        <h2> <span style={{ color: 'darkgray' }}> Cliente &nbsp;<Icon name='angle double right' size="small" /> </span> Alteração</h2>
+                    }
 
                     <Divider />
 
@@ -128,7 +162,9 @@ export default function FormCliente() {
                                 color='orange'
                             >
                                 <Icon name='reply' />
-                                Voltar
+                                <Link to={'/list-cliente'}>Voltar</Link>
+
+
                             </Button>
 
                             <Button
@@ -141,7 +177,8 @@ export default function FormCliente() {
                                 onClick={() => salvar()}
                             >
                                 <Icon name='save' />
-                                Salvar
+                                <Link to={'/list-cliente'}>Salvar</Link>
+
                             </Button>
 
                         </div>
