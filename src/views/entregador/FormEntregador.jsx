@@ -24,9 +24,9 @@ export default function FormEntregador() {
     const [bairro, setBairro] = useState('');
     const [cidade, setCidade] = useState('');
     const [cep, setCep] = useState('');
-    // const [uf, setUf] = useState('');
+    const [uf, setUf] = useState('');
     const [complemento, setComplemento] = useState('');
-    // const [ativo, setAtivo] = useState('');
+    const [ativo, setAtivo] = useState('');
 
     function salvar() {
 
@@ -44,9 +44,9 @@ export default function FormEntregador() {
             bairro: bairro,
             cidade: cidade,
             cep: cep,
-            // uf: uf,
+            uf: uf,
             complemento: complemento,
-            // ativo: ativo
+            ativo: ativo
         }
 
         axios.post("http://localhost:8080/api/entregador", entregadorRequest).then((response) => {
@@ -212,16 +212,16 @@ export default function FormEntregador() {
 
                             </Form.Group>
 
-                            <Form.Group widths='equal'>
-
-                                <Dropdown
-                                    placeholder="UF"
-                                    fluid
-                                    selection>
-                                </Dropdown>
-
-
-                            </Form.Group>
+                            <Form.Select
+                                fluid
+                                label='UF'
+                                options={uf}
+                                placeholder='Selecione'
+                                value={enderecoEstado}
+                                onChange={(e, { setUf }) => {
+                                    setEnderecoEstado(setUf)
+                                }}
+                            />
 
                             <Form.Group widths='equal'>
 
@@ -235,19 +235,22 @@ export default function FormEntregador() {
 
                             </Form.Group>
 
-                            <Form.Group inline >
-                                Ativo:
+                            <Form.Group inline>
+
+                                <label>Ativo: </label>
+
                                 <Form.Radio
-                                    label="Sim"
-                                    name='ativo'
-                                    value='sim'
+                                    label='Sim'
+                                    checked={ativo}
+                                    onChange={e => setAtivo(true)}
                                 />
 
                                 <Form.Radio
                                     label='Não'
-                                    name='ativo'
-                                    value='não'
+                                    checked={!ativo}
+                                    onChange={e => setAtivo(false)}
                                 />
+
                             </Form.Group>
                         </Form>
 
