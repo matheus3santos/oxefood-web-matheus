@@ -7,7 +7,7 @@ import Home from './views/home';
 import FormProduto from './views/produto/FormProduto';
 
 import ListCliente from './views/cliente/ListCliente';
-import ListProduto from './views/entregador/ListProduto';
+import ListProduto from './views/produto/ListProduto';
 
 function Rotas() {
     return (

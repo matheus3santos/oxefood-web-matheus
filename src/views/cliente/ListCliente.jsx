@@ -32,6 +32,7 @@ export default function ListCliente() {
         let arrayData = dataParam.split('-');
         return arrayData[2] + '/' + arrayData[1] + '/' + arrayData[0];
     }
+    
     function confirmaRemover(id) {
         setOpenModal(true)
         setIdRemover(id)

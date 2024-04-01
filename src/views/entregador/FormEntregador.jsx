@@ -24,7 +24,7 @@ export default function FormEntregador() {
     const [bairro, setBairro] = useState('');
     const [cidade, setCidade] = useState('');
     const [cep, setCep] = useState('');
-    const [uf, setUf] = useState('');
+    const [uf, setEnderecoEstado] = useState('');
     const [complemento, setComplemento] = useState('');
     const [ativo, setAtivo] = useState('');
 
@@ -215,11 +215,39 @@ export default function FormEntregador() {
                             <Form.Select
                                 fluid
                                 label='UF'
-                                options={uf}
+                                options={[
+                                    { key: 'PE', text: 'Pernambuco' },
+                                    { key: 'BA', text: 'Bahia' },
+                                    { key: 'PR', text: 'Paraná' },
+                                    { key: 'SP', text: 'São Paulo' },
+                                    { key: 'RJ', text: 'Rio de Janeiro' },
+                                    { key: 'MG', text: 'Minas Gerais' },
+                                    { key: 'RS', text: 'Rio Grande do Sul' },
+                                    { key: 'SC', text: 'Santa Catarina' },
+                                    { key: 'AM', text: 'Amazonas' },
+                                    { key: 'PA', text: 'Pará' },
+                                    { key: 'TO', text: 'Tocantins' },
+                                    { key: 'MA', text: 'Maranhão' },
+                                    { key: 'PI', text: 'Piauí' },
+                                    { key: 'CE', text: 'Ceará' },
+                                    { key: 'RN', text: 'Rio Grande do Norte' },
+                                    { key: 'PB', text: 'Paraíba' },
+                                    { key: 'AL', text: 'Alagoas' },
+                                    { key: 'SE', text: 'Sergipe' },
+                                    { key: 'RO', text: 'Rondônia' },
+                                    { key: 'AC', text: 'Acre' },
+                                    { key: 'RR', text: 'Roraima' },
+                                    { key: 'AP', text: 'Amapá' },
+                                    { key: 'DF', text: 'Distrito Federal' },
+                                    { key: 'GO', text: 'Goiás' },
+                                    { key: 'MT', text: 'Mato Grosso' },
+                                    { key: 'MS', text: 'Mato Grosso do Sul' },
+                                    { key: 'ES', text: 'Espírito Santo' },
+                                ]}
                                 placeholder='Selecione'
-                                value={enderecoEstado}
-                                onChange={(e, { setUf }) => {
-                                    setEnderecoEstado(setUf)
+                                value={uf}
+                                onChange={(e, { value }) => {
+                                    setEnderecoEstado(value)
                                 }}
                             />
 

@@ -19,15 +19,11 @@ export default function ListProduto() {
                 setLista(response.data)
             })
     }
-    function formatarData(dataParam) {
 
-        if (dataParam === null || dataParam === '' || dataParam === undefined) {
-            return ''
-        }
 
-        let arrayData = dataParam.split('-');
-        return arrayData[2] + '/' + arrayData[1] + '/' + arrayData[0];
-    }
+    
+    //Renderização dos componentes
+
     return (
         <div>
             <MenuSistema tela={'produto'} />
@@ -46,7 +42,7 @@ export default function ListProduto() {
                             icon='clipboard outline'
                             floated='right'
                             as={Link}
-                            to='/form-cliente'
+                            to='/form-produto'
                         />
                                                <br/><br/><br/>
                   
