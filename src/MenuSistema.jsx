@@ -33,7 +33,7 @@ export default function MenuSistema(props) {
                     name='entregador'
                     active={props.tela === 'entregador'}
                     as={Link}
-                    to='/form-entregador'
+                    to='/list-entregador'
                 />
 
             </Menu>

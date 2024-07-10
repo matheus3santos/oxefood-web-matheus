@@ -18,14 +18,14 @@ export default function FormEntregador() {
     const [foneFixo, setFoneFixo] = useState('');
     const [foneCelular, setFoneCelular] = useState('');
     const [qtdEntregasRealizadas, setQtdEntregasRealizadas] = useState('');
-    const [valorPorEntrega, setValorPorEntrega] = useState('');
-    const [rua, setRua] = useState('');
-    const [numero, setNumero] = useState('');
-    const [bairro, setBairro] = useState('');
-    const [cidade, setCidade] = useState('');
-    const [cep, setCep] = useState('');
-    const [uf, setEnderecoEstado] = useState('');
-    const [complemento, setComplemento] = useState('');
+    const [valorFrete, setValorFrete] = useState('');
+    const [enderecoRua, setRua] = useState('');
+    const [enderecoNumero, setNumero] = useState('');
+    const [enderecoBairro, setBairro] = useState('');
+    const [enderecoCidade, setCidade] = useState('');
+    const [enderecoCep, setCep] = useState('');
+    const [enderecoUf, setEnderecoEstado] = useState('');
+    const [enderecoComplemento, setComplemento] = useState('');
     const [ativo, setAtivo] = useState('');
 
     function salvar() {
@@ -38,14 +38,14 @@ export default function FormEntregador() {
             foneFixo: foneFixo,
             foneCelular: foneCelular,
             qtdEntregasRealizadas: qtdEntregasRealizadas,
-            valorPorEntrega: valorPorEntrega,
-            rua: rua,
-            numero: numero,
-            bairro: bairro,
-            cidade: cidade,
-            cep: cep,
-            uf: uf,
-            complemento: complemento,
+            valorFrete: valorFrete,
+            enderecoRua: enderecoRua,
+            enderecoNumero: enderecoNumero,
+            enderecoBairro: enderecoBairro,
+            enderecoCidade: enderecoCidade,
+            enderecoCep: enderecoCep,
+            enderecoUf: enderecoUf,
+            enderecoComplemento: enderecoComplemento,
             ativo: ativo
         }
 
@@ -102,11 +102,17 @@ export default function FormEntregador() {
                                 <Form.Input
                                     required
                                     fluid
-                                    label='RG'
-                                    maxLength="7"
-                                    value={rg}
-                                    onChange={e => setRg(e.target.value)}
-                                />
+                                    label='RG'>
+                                    <InputMask
+                                        placeholder="Ex: 9.999.999"
+                                        required
+                                        mask="9.999.999"
+                                        value={rg}
+                                        onChange={e => setRg(e.target.value)}
+                                    />
+                                </Form.Input>
+
+                               
 
                             </Form.Group>
 
@@ -115,9 +121,11 @@ export default function FormEntregador() {
                                 <Form.Input
                                     fluid
                                     label='DT Nascimento'
-                                    width={6}>
+                                    width={10}>
                                     <InputMask
-                                        mask="99/99/9999"
+                                        mask="9999-99-99"
+                                        maskChar={null}
+                                        placeholder="Ex: 2005/03/19"
                                         value={dataNascimento}
                                         onChange={e => setDataNascimento(e.target.value)}
                                     />
@@ -157,8 +165,8 @@ export default function FormEntregador() {
                                     fluid
                                     label='Valor Por Frete'
                                     width={6}
-                                    value={valorPorEntrega}
-                                    onChange={e => setValorPorEntrega(e.target.value)}>
+                                    value={valorFrete}
+                                    onChange={e => setValorFrete(e.target.value)}>
                                 </Form.Input>
 
                             </Form.Group>
@@ -169,7 +177,7 @@ export default function FormEntregador() {
                                     fluid
                                     label='Rua'
                                     width={10}
-                                    value={rua}
+                                    value={enderecoRua}
                                     onChange={e => setRua(e.target.value)}>
                                 </Form.Input>
 
@@ -177,7 +185,7 @@ export default function FormEntregador() {
                                     fluid
                                     label='Numero'
                                     width={4}
-                                    value={numero}
+                                    value={enderecoNumero}
                                     onChange={e => setNumero(e.target.value)}>
                                 </Form.Input>
 
@@ -189,7 +197,7 @@ export default function FormEntregador() {
                                     fluid
                                     label='Bairro'
                                     width={10}
-                                    value={bairro}
+                                    value={enderecoBairro}
                                     onChange={e => setBairro(e.target.value)}>
 
                                 </Form.Input>
@@ -198,7 +206,7 @@ export default function FormEntregador() {
                                     fluid
                                     label='Cidade'
                                     width={10}
-                                    value={cidade}
+                                    value={enderecoCidade}
                                     onChange={e => setCidade(e.target.value)}>
                                 </Form.Input>
 
@@ -206,7 +214,7 @@ export default function FormEntregador() {
                                     fluid
                                     label='CEP'
                                     width={10}
-                                    value={cep}
+                                    value={enderecoCep}
                                     onChange={e => setCep(e.target.value)}>
                                 </Form.Input>
 
@@ -245,10 +253,12 @@ export default function FormEntregador() {
                                     { key: 'ES', text: 'Espírito Santo' },
                                 ]}
                                 placeholder='Selecione'
-                                value={uf}
-                                onChange={(e, { value }) => {
-                                    setEnderecoEstado(value)
-                                }}
+                                value={enderecoUf}
+                                 onChange={(e, { value }) => {
+                                     setEnderecoEstado(value)
+                                 }}
+                                
+                                 
                             />
 
                             <Form.Group widths='equal'>
@@ -257,7 +267,7 @@ export default function FormEntregador() {
                                     fluid
                                     label='Complemento'
                                     width={10}
-                                    value={complemento}
+                                    value={enderecoComplemento}
                                     onChange={e => setComplemento(e.target.value)}>
                                 </Form.Input>
 
