@@ -8,21 +8,51 @@ import { Link, useLocation } from "react-router-dom";
 
 export default function FormProduto() {
 
+    const { state } = useLocation();
+
+    const [idProduto, setIdProduto] = useState();
     const [titulo, setTitulo] = useState('');
     const [codigo, setCodigo] = useState('');
     const [descricao, setDescricao] = useState('');
-    const [valorUnitario, setUnitario] = useState('');
+    const [valorUnitario, setValorUnitario] = useState('');
     const [tempoEntregaMinimo, setTempoEntregaMinimo] = useState('');
     const [tempoEntregaMaximo, setTempoEntregaMaximo] = useState('');
-    const { state } = useLocation();
-    const [idProduto, setIdProduto] = useState();
+    const [listaCategoria, setListaCategoria] = useState([]);
+    const [idCategoria, setIdCategoria] = useState();
 
+    useEffect(() => {
+        if (state != null && state.id != null) {
+
+            axios.get("http://localhost:8080/api/produto/" + state.id)
+                .then((response) => {
+                    setIdProduto(response.data.id)
+                    setCodigo(response.data.codigo)
+                    setTitulo(response.data.titulo)
+                    setDescricao(response.data.descricao)
+                    setValorUnitario(response.data.valorUnitario)
+                    setTempoEntregaMinimo(response.data.tempoEntregaMinimo)
+                    setTempoEntregaMaximo(response.data.tempoEntregaMaximo)
+                    setIdCategoria(response.data.categoria.id)
+
+                })
+        }
+
+        axios.get("http://localhost:8080/api/categoriaProduto")
+            .then((response) => {
+
+                const dropDownCategorias = response.data.map(c => ({ text: c.descricao, value: c.id }));
+                setListaCategoria(dropDownCategorias);
+            })
+
+    }, [state])
 
     function salvar() {
 
         let produtoRequest = {
-            titulo: titulo,
+
+            idCategoria: idCategoria,
             codigo: codigo,
+            titulo: titulo,
             descricao: descricao,
             valorUnitario: valorUnitario,
             tempoEntregaMinimo: tempoEntregaMinimo,
@@ -40,22 +70,6 @@ export default function FormProduto() {
         }
 
     }
-
-
-    useEffect(() => {
-        if (state != null && state.id != null) {
-            axios.get("http://localhost:8080/api/produto/" + state.id)
-                .then((response) => {
-                    setIdProduto(response.data.id)
-                    setTitulo(response.data.titulo)
-                    setCodigo(response.data.codigo)
-                    setDescricao(response.data.descricao)
-                    setUnitario(response.data.valorUnitario)
-                    setTempoEntregaMinimo(response.data.tempoEntregaMinimo)
-                    setTempoEntregaMaximo(response.data.tempoEntregaMaximo)
-                })
-        }
-    }, [state])
 
 
     //Renderização dos componentes
@@ -103,7 +117,21 @@ export default function FormProduto() {
                                     onChange={e => setCodigo(e.target.value)}
                                 />
 
+                            </Form.Group>
 
+                            <Form.Group widths='equal'>
+                                <Form.Select
+                                    required
+                                    fluid
+                                    tabIndex='3'
+                                    placeholder='Selecione'
+                                    label='Categoria'
+                                    options={listaCategoria}
+                                    value={idCategoria}
+                                    onChange={(e, { value }) => {
+                                        setIdCategoria(value)
+                                    }}
+                                />
                             </Form.Group>
 
                             <Form.Group>
@@ -126,7 +154,7 @@ export default function FormProduto() {
                                     fluid
                                     label='Valor Unitário'
                                     value={valorUnitario}
-                                    onChange={e => setUnitario(e.target.value)}
+                                    onChange={e => setValorUnitario(e.target.value)}
                                 />
 
                                 <Form.Input
