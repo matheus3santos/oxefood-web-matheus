@@ -29,12 +29,28 @@ export default function FormPromocao() {
 
         if (idPromocao != null) { //Alteração:
             axios.put("http://localhost:8080/api/promocao/" + idPromocao, promocaoRequest)
-                .then((response) => { console.log('Promocao alterado com sucesso.') })
-                .catch((error) => { console.log('Erro ao alter um promocao.') })
+                .then((response) => { notifySuccess('Promoção alterada com sucesso.') })
+                .catch((error) => {
+                    if (error.response.data.errors != undefined) {
+                        for (let i = 0; i < error.response.data.errors.length; i++) {
+                            notifyError(error.response.data.errors[i].defaultMessage)
+                        }
+                    } else {
+                        notifyError(error.response.data.message)
+                    }
+                })
         } else { //Cadastro:
             axios.post("http://localhost:8080/api/promocao", promocaoRequest)
-                .then((response) => { console.log('Promocao cadastrado com sucesso.') })
-                .catch((error) => { console.log('Erro ao incluir o promocao.') })
+                .then((response) => { notifySuccess('Promoção cadastrada com sucesso.') })
+                .catch((error) => {
+                    if (error.response.data.errors != undefined) {
+                        for (let i = 0; i < error.response.data.errors.length; i++) {
+                            notifyError(error.response.data.errors[i].defaultMessage)
+                        }
+                    } else {
+                        notifyError(error.response.data.message)
+                    }
+                })
         }
         ;
     }

@@ -19,17 +19,33 @@ export default function FormCategoriaProduto() {
 
         let categoriaProdutoRequest = {
             descricao: descricao,
-          
+
         }
 
         if (idcategoriaProduto != null) { //Alteração:
             axios.put("http://localhost:8080/api/categoriaProduto/" + idcategoriaProduto, categoriaProdutoRequest)
-                .then((response) => { console.log('categoriaProduto alterado com sucesso.') })
-                .catch((error) => { console.log('Erro ao alter um categoriaProduto.') })
+                .then((response) => { notifySuccess('Categoria cadastrada com sucesso.') })
+                .catch((error) => {
+                    if (error.response.data.errors != undefined) {
+                        for (let i = 0; i < error.response.data.errors.length; i++) {
+                            notifyError(error.response.data.errors[i].defaultMessage)
+                        }
+                    } else {
+                        notifyError(error.response.data.message)
+                    }
+                })
         } else { //Cadastro:
             axios.post("http://localhost:8080/api/categoriaProduto", categoriaProdutoRequest)
-                .then((response) => { console.log('categoriaProduto cadastrado com sucesso.') })
-                .catch((error) => { console.log('Erro ao incluir o categoriaProduto.') })
+                .then((response) => { notifySuccess('Categoria cadastrada com sucesso.') })
+                .catch((error) => {
+                    if (error.response.data.errors != undefined) {
+                        for (let i = 0; i < error.response.data.errors.length; i++) {
+                            notifyError(error.response.data.errors[i].defaultMessage)
+                        }
+                    } else {
+                        notifyError(error.response.data.message)
+                    }
+                })
         }
         ;
     }

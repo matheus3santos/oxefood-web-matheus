@@ -49,11 +49,17 @@ export default function FormEntregador() {
             ativo: ativo
         }
 
-        axios.post("http://localhost:8080/api/entregador", entregadorRequest).then((response) => {
-            console.log('Entregador cadastrado com sucesso!');
-        }).catch((error) => {
-            console.log('Erro ao cadastrar entregador!');
-        });
+        axios.post("http://localhost:8080/api/entregador", entregadorRequest)
+            .then((response) => { notifySuccess('Entregador cadastrado com sucesso.') })
+            .catch((error) => {
+                if (error.response.data.errors != undefined) {
+                    for (let i = 0; i < error.response.data.errors.length; i++) {
+                        notifyError(error.response.data.errors[i].defaultMessage)
+                    }
+                } else {
+                    notifyError(error.response.data.message)
+                }
+            })
     }
 
 
@@ -112,7 +118,7 @@ export default function FormEntregador() {
                                     />
                                 </Form.Input>
 
-                               
+
 
                             </Form.Group>
 
@@ -254,11 +260,11 @@ export default function FormEntregador() {
                                 ]}
                                 placeholder='Selecione'
                                 value={enderecoUf}
-                                 onChange={(e, { value }) => {
-                                     setEnderecoEstado(value)
-                                 }}
-                                
-                                 
+                                onChange={(e, { value }) => {
+                                    setEnderecoEstado(value)
+                                }}
+
+
                             />
 
                             <Form.Group widths='equal'>
