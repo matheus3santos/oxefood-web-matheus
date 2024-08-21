@@ -3,10 +3,7 @@ import InputMask from 'react-input-mask';
 import { Button, Container, Divider, Dropdown, Form, Icon } from 'semantic-ui-react';
 import axios from "axios";
 import MenuSistema from "../../MenuSistema";
-
-
-
-
+import { notifyError, notifySuccess } from '../../views/Util';
 
 
 export default function FormEntregador() {

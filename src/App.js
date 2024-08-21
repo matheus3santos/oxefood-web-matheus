@@ -4,10 +4,10 @@ import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
 
-import Home from './views/home';
-import FormCliente from './views/cliente/FormCliente';
-import FormProduto from './views/produto/FormProduto';
-import FormEntregador from './views/entregador/FormEntregador'
+// import Home from './views/home';
+// import FormCliente from './views/cliente/FormCliente';
+// import FormProduto from './views/produto/FormProduto';
+// import FormEntregador from './views/entregador/FormEntregador'
 import Rotas from './Rotas'
 
 

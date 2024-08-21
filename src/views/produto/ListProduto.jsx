@@ -1,8 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Button, Container, Divider, Icon, Table, Modal, Header } from 'semantic-ui-react';
+import { Button, Container, Divider, Icon, Table, Modal, Header, Menu, Form, Segment } from 'semantic-ui-react';
 import MenuSistema from '../../MenuSistema';
+
+
 
 export default function ListProduto() {
 
@@ -28,7 +30,7 @@ export default function ListProduto() {
                 setListaProduto(response.data)
             })
 
-        axios.get("http://localhost:8080/api/categoriaproduto")
+        axios.get("http://localhost:8080/api/categoriaProduto")
             .then((response) => {
 
                 const dropDownCategorias = [];
@@ -57,7 +59,7 @@ export default function ListProduto() {
 
                 axios.get("http://localhost:8080/api/produto")
                     .then((response) => {
-                        setLista(response.data)
+                        setListaProduto(response.data)
                     })
             })
             .catch((error) => {
@@ -111,15 +113,9 @@ export default function ListProduto() {
 
         await axios.post("http://localhost:8080/api/produto/filtrar", formData)
             .then((response) => {
-                setListaProdutos(response.data)
+                setListaProduto(response.data)
             })
     }
-
-
-
-
-
-
 
     //Renderização dos componentes
 
